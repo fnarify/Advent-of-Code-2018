@@ -16,9 +16,10 @@
  */
 int main(int argc, char *argv[])
 {
+    int sum = 0, n = 0, first = 0;
     char freq[MAX_LINE];
-    char *list = malloc(sizeof(list) * 160000);
-    int sum = 0, n = 0;
+    char *list = calloc(160000, sizeof(list));
+    if (!list) {printf("No memory\n"); return 1;}
 
     if (argc > 1)
     {
@@ -45,11 +46,14 @@ int main(int argc, char *argv[])
             }
             rewind(file);
             n++;
+
+            if (!first) {printf("First sum: %d\n", sum); first = 1;}
         }
 
         printf("total freq: %d\n", sum);
         fclose(file);
     }
+    else {printf("input filename as first argv\n");}
 
     free(list);
 
